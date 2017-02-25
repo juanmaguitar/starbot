@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node ./src",
     "notify": "node ./src/tasks/notify",
+    "notify:weekly": "if [ $(date +%u) = 1 ]; then npm run notify; fi",
     "test": "standard"
   },
   "author": {
