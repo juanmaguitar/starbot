@@ -34,5 +34,5 @@ trending('weekly', 'javascript')
       console.log(res)
       console.log(config('WEBHOOK_URL') )
     })
-  });
+  })
   .catch(err => throw err )
