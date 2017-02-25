@@ -7,20 +7,21 @@ const IncomingWebhook = require('@slack/client').IncomingWebhook;
 
 var webhook = new IncomingWebhook( config('WEBHOOK_URL') );
 
-const msgDefaults = {
-  responseType: 'in_channel',
-  username: 'Starbot',
-  iconEmoji: config('ICON_EMOJI')
-}
-
 trending('weekly', 'javascript')
   .then( repos => {
+
+    const msgDefaults = {
+      text: 'Top 5 Repositories of Javascript this week are... '
+      responseType: 'in_channel',
+      username: 'Starbot',
+      iconEmoji: config('ICON_EMOJI')
+    }
 
     var attachments = repos.slice(0, 5).map((repo) => {
       return {
         title: `${repo.author}/${repo.name} `,
         title_link: repo.href,
-        text: `_${repo.description}_\n${repo.language} • ${repo.stars}`,
+        text: `_${repo.description}_\n${repo.language} • ⭐️ ${repo.stars} • 🍴️ ${repo.forks}`,
         mrkdwn_in: ['text', 'pretext']
       }
     })
