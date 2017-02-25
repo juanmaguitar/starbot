@@ -31,5 +31,6 @@ trending('javascript', (err, repos) => {
     if (err) throw err
     console.log(`\n🚀  Starbot report delivered 🚀`)
     console.log(res)
+    console.log(config('WEBHOOK_URL') )
   })
 })
