@@ -9,7 +9,7 @@ const handler = (payload, res) => {
   console.log(payload)
   const language = payload.text.split(' ')[1]
   console.log(language)
-  trending(language)
+  trending('weekly', language)
     .then( repos => {
 
       const msgDefaults = {
