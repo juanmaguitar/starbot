@@ -6,9 +6,11 @@ const config = require('../config')
 const trending = require('trending-github');
 
 const handler = (payload, res) => {
-  console.log(payload)
-  trending('weekly', 'javascript')
+  const language = payload.text.split(' ')[1]
+  trending(language)
     .then( repos => {
+
+      console.log(repos)
 
       const msgDefaults = {
         text: 'Top 5 Repositories of Javascript this week are... ',
