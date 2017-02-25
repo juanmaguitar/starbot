@@ -1,17 +1,11 @@
-
 'use strict'
 
 const _ = require('lodash')
 const config = require('../config')
 const trending = require('github-trending')
-const Botkit = require('botkit')
+const IncomingWebhook = require('@slack/client').IncomingWebhook;
 
-var controller = Botkit.slackbot({})
-var bot = controller.spawn()
-
-console.log ( 'notify.js...' )
-console.log ( config('WEBHOOK_URL') )
-bot.configureIncomingWebhook({ url: config('WEBHOOK_URL') })
+var webhook = new IncomingWebhook( config('WEBHOOK_URL') );
 
 const msgDefaults = {
   response_type: 'in_channel',
@@ -32,10 +26,10 @@ trending('javascript', (err, repos) => {
   })
 
   let msg = _.defaults({ attachments: attachments }, msgDefaults)
-  console.log ( msg )
-  bot.sendWebhook(msg, (err, res) => {
-    if (err) throw err
 
+  webhook.send(msg, (err, res) => {
+    if (err) throw err
     console.log(`\n🚀  Starbot report delivered 🚀`)
+    console.log(red)
   })
 })
