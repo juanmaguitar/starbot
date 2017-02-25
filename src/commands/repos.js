@@ -1,4 +1,3 @@
-
 'use strict'
 
 const _ = require('lodash')
@@ -6,9 +5,9 @@ const config = require('../config')
 const trending = require('trending-github');
 
 const handler = (payload, res) => {
-  console.log(payload)
+
   const language = payload.text.split(' ')[1]
-  console.log(language)
+
   trending('weekly', language)
     .then( repos => {
 
@@ -28,7 +27,7 @@ const handler = (payload, res) => {
           mrkdwn_in: ['text', 'pretext']
         }
       })
-      console.log(attachments)
+
       let msg = _.defaults({
         channel: payload.channel_name,
         attachments: attachments
