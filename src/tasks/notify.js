@@ -9,6 +9,8 @@ const Botkit = require('botkit')
 var controller = Botkit.slackbot({})
 var bot = controller.spawn()
 
+console.log ( 'notify.js...' )
+console.log ( config('WEBHOOK_URL') )
 bot.configureIncomingWebhook({ url: config('WEBHOOK_URL') })
 
 const msgDefaults = {
@@ -30,7 +32,7 @@ trending('javascript', (err, repos) => {
   })
 
   let msg = _.defaults({ attachments: attachments }, msgDefaults)
-
+  console.log ( msg )
   bot.sendWebhook(msg, (err, res) => {
     if (err) throw err
 
