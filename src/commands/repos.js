@@ -13,7 +13,7 @@ const handler = (payload, res) => {
     .then( repos => {
 
       const msgDefaults = {
-        text: 'Top 5 Repositories of Javascript this week are... ',
+        text: `Top 5 Repositories ${ language ? 'of ' + language.toUpperCase() : '' }  this week are... `,
         responseType: 'in_channel',
         username: 'Starbot',
         iconEmoji: config('ICON_EMOJI')
