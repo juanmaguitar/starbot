@@ -17,7 +17,9 @@ trending('weekly', 'javascript')
       iconEmoji: config('ICON_EMOJI')
     }
 
+    console.log(repos)
     var orderedRepos = _.sortByOrder(repos, ['stars'], [true])
+    console.log(orderedRepos)
     var attachments = orderedRepos.slice(0, 5).map((repo) => {
       return {
         title: `${repo.author}/${repo.name} `,
