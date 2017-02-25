@@ -30,6 +30,6 @@ trending('javascript', (err, repos) => {
   webhook.send(msg, (err, res) => {
     if (err) throw err
     console.log(`\n🚀  Starbot report delivered 🚀`)
-    console.log(red)
+    console.log(res)
   })
 })
