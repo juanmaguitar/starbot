@@ -6,11 +6,11 @@ const config = require('../config')
 const trending = require('trending-github');
 
 const handler = (payload, res) => {
+  console.log(payload)
   const language = payload.text.split(' ')[1]
+  console.log(language)
   trending(language)
     .then( repos => {
-
-      console.log(repos)
 
       const msgDefaults = {
         text: 'Top 5 Repositories of Javascript this week are... ',
@@ -22,13 +22,13 @@ const handler = (payload, res) => {
       var orderedRepos = _.orderBy(repos, ['stars'], ['desc'])
       var attachments = orderedRepos.slice(0, 5).map((repo) => {
         return {
-          title: `${repo.owner}/${repo.title} `,
-          title_link: repo.url,
-          text: `_${repo.description}_\n${repo.language} • ${repo.star}>`,
+          title: `${repo.author}/${repo.name} `,
+          title_link: repo.href,
+          text: `_${repo.description}_\n${repo.language} • ⭐️ ${repo.stars} • 🍴️ ${repo.forks}`,
           mrkdwn_in: ['text', 'pretext']
         }
       })
-
+      console.log(attachments)
       let msg = _.defaults({
         channel: payload.channel_name,
         attachments: attachments
