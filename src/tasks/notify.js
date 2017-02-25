@@ -4,23 +4,21 @@ const _ = require('lodash')
 const config = require('../config')
 const trending = require('trending-github');
 const IncomingWebhook = require('@slack/client').IncomingWebhook;
+const language = 'javascript'
 
 var webhook = new IncomingWebhook( config('WEBHOOK_URL') );
 
-trending('weekly', 'javascript')
+trending('weekly', language)
   .then( repos => {
 
-    //console.log(repos)
-    console.log('repos...')
     const msgDefaults = {
       text: `Top 5 Repositories${ language ? ' of ' + language.toUpperCase() : '' } this week are... `,
       responseType: 'in_channel',
       username: 'Starbot',
       iconEmoji: config('ICON_EMOJI')
     }
-    console.log(msgDefaults)
+
     var orderedRepos = _.orderBy(repos, ['stars'], ['desc'])
-    console.log(orderedRepos)
     var attachments = orderedRepos.slice(0, 5).map((repo) => {
       return {
         title: `${repo.author}/${repo.name} `,
@@ -29,7 +27,7 @@ trending('weekly', 'javascript')
         mrkdwn_in: ['text', 'pretext']
       }
     })
-    console.log(attachments)
+
     let msg = _.defaults({ attachments: attachments }, msgDefaults)
 
     webhook.send(msg, (err, res) => {
