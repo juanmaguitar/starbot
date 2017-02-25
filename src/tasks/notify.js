@@ -11,7 +11,7 @@ trending('weekly', 'javascript')
   .then( repos => {
 
     const msgDefaults = {
-      text: 'Top 5 Repositories of Javascript this week are... '
+      text: 'Top 5 Repositories of Javascript this week are... ',
       responseType: 'in_channel',
       username: 'Starbot',
       iconEmoji: config('ICON_EMOJI')
