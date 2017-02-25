@@ -6,6 +6,7 @@ const config = require('../config')
 const trending = require('trending-github');
 
 const handler = (payload, res) => {
+  console.log(payload)
   trending('weekly', 'javascript')
     .then( repos => {
 
