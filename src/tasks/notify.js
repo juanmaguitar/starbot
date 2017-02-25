@@ -10,6 +10,7 @@ var webhook = new IncomingWebhook( config('WEBHOOK_URL') );
 trending('weekly', 'javascript')
   .then( repos => {
 
+    console.log(repos)
     const msgDefaults = {
       text: `Top 5 Repositories${ language ? ' of ' + language.toUpperCase() : '' } this week are... `,
       responseType: 'in_channel',
@@ -26,7 +27,7 @@ trending('weekly', 'javascript')
         mrkdwn_in: ['text', 'pretext']
       }
     })
-
+    console.log(attachments)
     let msg = _.defaults({ attachments: attachments }, msgDefaults)
 
     webhook.send(msg, (err, res) => {
